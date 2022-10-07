@@ -15,4 +15,10 @@ const PORT = process.env.PORT || 3001;
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true}));
+
+
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(routes);
