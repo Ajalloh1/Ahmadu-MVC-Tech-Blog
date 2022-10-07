@@ -22,3 +22,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
+
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () =>
+      console.log(
+        "Running on port ${PORT}. check your localhost 3001:${PORT} and create an account!"
+      )
+    );
+  });
