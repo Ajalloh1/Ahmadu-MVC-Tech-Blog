@@ -13,3 +13,33 @@ Blog.init(
       allowNull: false,
       autoIncrement: true,
     },
+    Blog: {
+      type: DataTypes.STRING,
+      allowNull: false,
+  },
+  user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+          model: "user",
+          key: "id",
+      },
+  },
+  post_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+          model: "post",
+          key: "id",
+      },
+  },
+},
+{
+  sequelize: conn,
+  freezeTableName: true,
+  underscored: true,
+  modelName: "blog",
+}
+);
+
+module.exports = Blog;
