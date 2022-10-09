@@ -15,3 +15,22 @@ Blog.belongsTo(Post, {
     foreignKey: "post_id",
 });
 
+Post.hasMany(Blog, {
+    foreignKey: "post_id",
+    onDelete: "CASCADE",
+});
+
+Blog.belongsTo(User, {
+    foreignKey: "user_id",
+});
+
+User.hasMany(Blog, {
+    foreignKey: "user_id",
+    onDelete: "CASCADE",
+});
+
+module.exports = {
+    User,
+    Post,
+    Blog,
+};
