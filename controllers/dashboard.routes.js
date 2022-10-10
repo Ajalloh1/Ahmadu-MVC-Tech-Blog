@@ -33,3 +33,55 @@ router.get("/", withAuth, (req, res) => {
   console.log(err);
   res.status(500).json(err);
 });
+///blog post//
+router.get('/blog/:id', async (req, res) => {
+    try {
+      const blogData = await Blog.findByPk(req.params.id, {
+        attributes: ['blog_title', 'blog_text', 'date_created'],
+        include: [
+          { model: User, attributes: ['username'] },
+          {
+            model: Reply,
+            attributes: ['id', 'reply_text', 'date_created'],
+            include: { model: User, attributes: ['id', 'username'] },
+          },
+        ],
+      });
+  
+      if (!blogData) {
+        res.render('404');
+        return;
+      }
+  
+      const loadBlog = await blogData.get({ plain: true });
+      console.log(loadBlog.replies);
+  
+      loadBlog.replies.forEach((v) => {
+        if (v.user.id === req.session.user) {
+          v.matchedUser = true;
+        }
+      });
+  
+      console.log(loadBlog.replies);
+  
+      res.render('blog', {
+        loadBlog,
+        loggedIn: req.session.loggedIn,
+        user: req.session.user,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+  // firt time users signup//
+  router.get('/signup', (req, res) => {
+    res.render('signup');
+    return;
+  });
+  ///LogIn page//
+  router.get('/login', (req, res) => {
+    res.render('login');
+    return;
+  });
+});
+  
