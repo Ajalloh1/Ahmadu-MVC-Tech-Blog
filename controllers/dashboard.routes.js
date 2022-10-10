@@ -37,7 +37,7 @@ router.get("/", withAuth, (req, res) => {
 router.get('/blog/:id', async (req, res) => {
     try {
       const blogData = await Blog.findByPk(req.params.id, {
-        attributes: ['blog_title', 'blog_text', 'date_created'],
+        attributes: ["blog_text", "created_at", "title", "id"],
         include: [
           { model: User, attributes: ['username'] },
           {
@@ -84,4 +84,24 @@ router.get('/blog/:id', async (req, res) => {
     return;
   });
 });
-  
+router.get("/edit/:id", withAuth, (req, res) => {
+    Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+      attributes: ["blog_text", "created_at", "title", "id"],
+      include: [
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
+          attributes: ["blog_text", "created_at", "title", "id"],
+          include: {
+            model: User,
+            attributes: ["username"],
+          },
+        },
+      ],
+    })
