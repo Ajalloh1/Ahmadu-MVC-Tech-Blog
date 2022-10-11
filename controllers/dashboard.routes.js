@@ -105,3 +105,18 @@ router.get("/edit/:id", withAuth, (req, res) => {
         },
       ],
     })
+    .then((dbPostData) => {
+        const post = dbPostData.get({ plain: true });
+        res.render("edit-posts", { post, loggedIn: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+  
+  router.get("/newpost", (req, res) => {
+    res.render("new-posts");
+  });
+  
+  module.exports = router;
