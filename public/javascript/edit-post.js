@@ -20,8 +20,4 @@ async function editNewPost(event) {
       }
     };
     
-
-
-
-
-    ocument .querySelector(".edit-post-form").addEventListener("submit", editNewPost);
+    document .querySelector(".edit-post-form").addEventListener("submit", editNewPost);
