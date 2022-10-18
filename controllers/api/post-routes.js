@@ -44,37 +44,37 @@ router.get('/:id', async (req, res) => {
           .json({ message: `No reply found with ID: ${req.params.id}` });
         return;
       }
-  
+    
       res.status(200).json(replyData);
     } catch {
       res.status(500).json(err);
     }
   });
   // update one by id
-router.put('/:id', withAuth, async (req, res) => {
-    try {
-      const replyData = await Reply.findByPk(req.params.id);
+// router.put('/:id', withAuth, async (req, res) => {
+//     try {
+//       const replyData = await Reply.findByPk(req.params.id);
   
-      if (!replyData) {
-        res
-          .status(404)
-          .json({ message: `No reply found with ID: ${req.params.id}` });
-        return;
-      }
+//       if (!replyData) {
+//         res
+//           .status(404)
+//           .json({ message: `No reply found with ID: ${req.params.id}` });
+//         return;
+//       }
   
-      const updateReplyData = await Reply.update(req.body, {
-        where: {
-          id: req.params.id,
-        },
-      });
+//       const updateReplyData = await Reply.update(req.body, {
+//         where: {
+//           id: req.params.id,
+//         },
+//       });
 
-      // delete one by id
-router.delete('/:id', withAuth, async (req, res) => {
-    try {
-      const deleteReplyData = await Reply.destroy({
-        where: {
-          id: req.params.id,
-        },
-      });
+//       // delete one by id
+// router.delete('/:id', withAuth, async (req, res) => {
+//     try {
+//       const deleteReplyData = await Reply.destroy({
+//         where: {
+//           id: req.params.id,
+//         },
+//       });
 
       module.exports = router;
