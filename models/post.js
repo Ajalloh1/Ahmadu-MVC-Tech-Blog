@@ -1,8 +1,6 @@
 
 const sequelize = require("../config/connection");
 const { Model, DataTypes } = require("sequelize");
-const { post } = require("../controllers");
-
 
 class Post extends Model {}
 
@@ -11,7 +9,7 @@ Post.init(
     id: {
         type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false,
+      // allowNull: false,
       autoIncrement: true,
     },
     content: {
