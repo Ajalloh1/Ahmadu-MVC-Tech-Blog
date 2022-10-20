@@ -12,7 +12,7 @@ Post.init(
       // allowNull: false,
       autoIncrement: true,
     },
-    content: {
+    blog_text: {
       type: DataTypes.STRING,
       allowNull: false,
   },
